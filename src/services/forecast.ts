@@ -1,4 +1,5 @@
 import { ForecastPoint, StormGlass } from '@src/clients/stormGlass';
+import { Beach } from '@src/models/beach';
 import { InternalError } from '@src/utils/errors/internal-error';
 
 export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
