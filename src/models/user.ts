@@ -1,5 +1,9 @@
 import mongoose, { Model, Document } from 'mongoose';
 
+export enum CustomValidation {
+  DUPLICATED = 'DUPLICATED',
+}
+
 export interface User {
   _id?: string;
   name: string;
@@ -28,6 +32,15 @@ const schema = new mongoose.Schema(
       },
     },
   }
+);
+
+schema.path('email').validate(
+  async (email: string) => {
+    const emailCount = await mongoose.models.User.countDocuments({ email });
+    return !emailCount;
+  },
+  'already exists in the database.',
+  CustomValidation.DUPLICATED
 );
 
 export const User: Model<UserModel> = mongoose.model('User', schema);
