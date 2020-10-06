@@ -13,7 +13,7 @@ jobs:
         mongodb-version: [4.2]
 
     steps:
-      - users: actions/checkout@v2
+      - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow
 
       - name: Use Node.js ${{ matrix.node-version }}
