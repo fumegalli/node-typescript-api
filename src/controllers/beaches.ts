@@ -1,6 +1,7 @@
 import { ClassMiddleware, Controller, Post } from '@overnightjs/core';
 import { authMiddleware } from '@src/middlewares/auth';
 import { Beach } from '@src/models/beach';
+import logger from '@src/utils/logger';
 import { Response, Request } from 'express';
 import { BaseController } from '.';
 
@@ -16,6 +17,7 @@ export class BeachesController extends BaseController {
 
       res.status(201).send(result);
     } catch (err) {
+      logger.error(err);
       this.sendUpsertErrorResponse(res, err);
     }
   }
